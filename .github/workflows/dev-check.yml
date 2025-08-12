@@ -1,0 +1,22 @@
+name: DEV-CHECK
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Style Check And Test
+        run: ./gradlew check --info

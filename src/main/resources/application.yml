@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: template-spring-cloud
+  cloud:
+    nacos:
+      config:
+        server-addr: nacos-service.infrastructure.svc.cluster.local
+        username: ${NACOS_USERNAME}
+        password: ${NACOS_PASSWORD}
+        namespace: ${NACOS_NAMESPACE}
+
+  config:
+    import:
+      - nacos:template-spring-cloud-config.yaml?group=BASE&refreshEnabled=true
+
+management:
+  endpoint:
+    health:
+      show-details: never
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
