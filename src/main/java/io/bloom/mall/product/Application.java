@@ -1,4 +1,4 @@
-package io.bloom.template_spring_cloud;
+package io.bloom.mall.product;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
