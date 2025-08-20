@@ -20,12 +20,30 @@ repositories {
 ext {
 	set('springCloudAlibabaVersion', "2023.0.3.3")
 	set('springCloudVersion', "2023.0.3")
+    set('commonsLang3Version', "3.18.0")
+    set('mysqlVersion', "8.4.0")
+    set('druidVersion', "1.2.23")
+    set('mybatisFlexVersion', "1.10.9")
 }
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation "org.springframework.boot:spring-boot-starter-validation"
+
+    implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
+	
+	// 数据库相关
+    implementation "com.mysql:mysql-connector-j:${mysqlVersion}"
+	implementation "com.alibaba:druid-spring-boot-starter:${druidVersion}"
+	implementation "com.mybatis-flex:mybatis-flex-spring-boot3-starter:${mybatisFlexVersion}"
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    annotationProcessor "com.mybatis-flex:mybatis-flex-processor:${mybatisFlexVersion}"
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

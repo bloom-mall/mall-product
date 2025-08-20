@@ -8,10 +8,12 @@ spring:
         username: ${NACOS_USERNAME}
         password: ${NACOS_PASSWORD}
         namespace: ${NACOS_NAMESPACE}
+        group: BASE
+        refresh-enabled: true
 
   config:
     import:
-      - nacos:mall-product-config.yaml?group=BASE&refreshEnabled=true
+      - nacos:mall-product-config.yaml
 
 management:
   endpoint:
