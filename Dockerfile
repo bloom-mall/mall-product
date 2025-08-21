@@ -1,5 +1,5 @@
 # generate the jar
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:17-jre-alpine
 
 RUN addgroup -S spring && adduser -S spring -G spring
 
