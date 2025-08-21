@@ -3,13 +3,19 @@ spring:
     name: mall-product
   cloud:
     nacos:
+      server-addr: nacos-service.infrastructure.svc.cluster.local
+      username: ${NACOS_USERNAME}
+      password: ${NACOS_PASSWORD}
       config:
-        server-addr: nacos-service.infrastructure.svc.cluster.local
-        username: ${NACOS_USERNAME}
-        password: ${NACOS_PASSWORD}
+        enabled: true
         namespace: ${NACOS_NAMESPACE}
         group: BASE
         refresh-enabled: true
+      discovery:
+        enabled: true
+        register-enabled: true
+        namespace: ${NACOS_NAMESPACE}
+        group: BASE
 
   config:
     import:
