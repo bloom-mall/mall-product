@@ -80,8 +80,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.BOT_PR_TOKEN }}
-          commit-message: "chore: Update ${{ github.event.repository.name }} image tag"
-          author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
+          commit-message: "Update ${{ github.event.repository.name }} image tag"
           branch: update-${{ github.event.repository.name }}-image-tag
           title: "[Dev] Update ${{ github.event.repository.name }} image tag"
           body: |
