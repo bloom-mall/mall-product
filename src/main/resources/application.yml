@@ -9,13 +9,13 @@ spring:
       config:
         enabled: true
         namespace: ${NACOS_NAMESPACE}
-        group: BASE
+        group: DEFAULT_GROUP
         refresh-enabled: true
       discovery:
         enabled: true
         register-enabled: true
         namespace: ${NACOS_NAMESPACE}
-        group: BASE
+        group: DEFAULT_GROUP
 
   config:
     import:
