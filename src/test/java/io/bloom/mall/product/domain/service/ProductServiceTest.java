@@ -33,8 +33,6 @@ public class ProductServiceTest {
         Product product = new Product();
         product.setName("测试商品");
         product.setCategoryId(1L);
-        product.setPrice(BigDecimal.valueOf(100.0));
-        product.setStock(100);
 
         // 模拟Mapper行为
         when(productRepository.insert(any(Product.class))).thenReturn(1);
@@ -46,8 +44,6 @@ public class ProductServiceTest {
         assertNotNull(result);
         assertEquals("测试商品", result.getName());
         assertEquals(1L, result.getCategoryId());
-        assertEquals(BigDecimal.valueOf(100.0), result.getPrice());
-        assertEquals(100, result.getStock());
         assertNotNull(result.getCreateTime());
         assertNotNull(result.getUpdateTime());
         assertEquals(0, result.getIsDeleted());
@@ -59,7 +55,6 @@ public class ProductServiceTest {
         Product product = new Product();
         product.setId(1L);
         product.setName("更新后的商品");
-        product.setPrice(BigDecimal.valueOf(200.0));
 
         // 模拟Mapper行为
         when(productRepository.update(any(Product.class))).thenReturn(1);
@@ -71,7 +66,6 @@ public class ProductServiceTest {
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("更新后的商品", result.getName());
-        assertEquals(BigDecimal.valueOf(200.0), result.getPrice());
         assertNotNull(result.getUpdateTime());
     }
 

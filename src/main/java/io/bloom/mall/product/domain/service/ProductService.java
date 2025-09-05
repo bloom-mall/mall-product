@@ -68,12 +68,6 @@ public class ProductService {
         if (product.getIsRecommend() == null) {
             product.setIsRecommend(0); // 默认不推荐
         }
-        if (product.getSalesCount() == null) {
-            product.setSalesCount(0); // 默认销量为0
-        }
-        if (product.getViewCount() == null) {
-            product.setViewCount(0); // 默认浏览量为0
-        }
         product.setIsDeleted(0); // 默认未删除
 
         productRepository.insert(product);
@@ -115,7 +109,7 @@ public class ProductService {
                 .where(PRODUCT.IS_DELETED.eq(0))
                 .and(PRODUCT.STATUS.eq(1)) // 上架状态
                 .and(PRODUCT.IS_HOT.eq(1)) // 热销商品
-                .orderBy(PRODUCT.SALES_COUNT.desc()) // 按销量降序
+                .orderBy(PRODUCT.CREATE_TIME.desc()) // 按创建时间降序
                 .limit(limit);
 
         return productRepository.selectListByQuery(queryWrapper);
@@ -143,59 +137,4 @@ public class ProductService {
         return productRepository.selectListByQuery(queryWrapper);
     }
 
-    @Transactional(rollbackFor = Exception.class)
-    public boolean incrementViewCount(Long id) {
-        // 先查询当前浏览量
-        Product product = productRepository.selectOneById(id);
-        if (product == null || product.getIsDeleted() == 1) {
-            return false;
-        }
-
-        // 更新浏览量
-        Product updateProduct = new Product();
-        updateProduct.setId(id);
-        updateProduct.setViewCount(product.getViewCount() + 1);
-        updateProduct.setUpdateTime(LocalDateTime.now());
-
-        return productRepository.update(updateProduct) > 0;
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public boolean incrementSalesCount(Long id, int count) {
-        // 先查询当前销量
-        Product product = productRepository.selectOneById(id);
-        if (product == null || product.getIsDeleted() == 1) {
-            return false;
-        }
-
-        // 更新销量
-        Product updateProduct = new Product();
-        updateProduct.setId(id);
-        updateProduct.setSalesCount(product.getSalesCount() + count);
-        updateProduct.setUpdateTime(LocalDateTime.now());
-
-        return productRepository.update(updateProduct) > 0;
-    }
-
-    @Transactional(rollbackFor = Exception.class)
-    public boolean decrementStock(Long id, int count) {
-        // 先查询当前库存
-        Product product = productRepository.selectOneById(id);
-        if (product == null || product.getIsDeleted() == 1) {
-            return false;
-        }
-
-        // 检查库存是否足够
-        if (product.getStock() < count) {
-            return false;
-        }
-
-        // 更新库存
-        Product updateProduct = new Product();
-        updateProduct.setId(id);
-        updateProduct.setStock(product.getStock() - count);
-        updateProduct.setUpdateTime(LocalDateTime.now());
-
-        return productRepository.update(updateProduct) > 0;
-    }
 }

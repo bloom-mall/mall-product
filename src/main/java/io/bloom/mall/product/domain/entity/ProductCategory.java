@@ -3,8 +3,10 @@ package io.bloom.mall.product.domain.entity;
 import com.mybatisflex.annotation.Id;
 import com.mybatisflex.annotation.KeyType;
 import com.mybatisflex.annotation.Table;
+import io.bloom.mall.product.domain.entity.Product;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import java.io.Serial;
 
@@ -88,5 +90,20 @@ public class ProductCategory implements Serializable {
      * 更新人
      */
     private String updateBy;
+
+    // 关联属性
+    private ProductCategory parent;
+    private List<ProductCategory> children;
+    private List<Product> products;
+
+    // 业务方法：是否为根分类
+    public boolean isRootCategory() {
+        return parentId == null || parentId == 0;
+    }
+
+    // 业务方法：是否为叶子分类
+    public boolean isLeafCategory() {
+        return children == null || children.isEmpty();
+    }
 
 }

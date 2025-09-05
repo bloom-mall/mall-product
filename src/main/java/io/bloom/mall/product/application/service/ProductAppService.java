@@ -18,6 +18,28 @@ import java.util.stream.Collectors;
  */
 @Service
 public class ProductAppService {
+    
+    /**
+     * 根据商品ID获取商品名称（静态方法，供其他服务调用）
+     * 
+     * @param productId 商品ID
+     * @param productService 商品服务
+     * @return 商品DTO（只包含名称字段）
+     */
+    public static ProductDTO getProductNameById(Long productId, ProductService productService) {
+        if (productId == null || productService == null) {
+            return null;
+        }
+        
+        Product product = productService.getProductById(productId);
+        if (product == null) {
+            return null;
+        }
+        
+        ProductDTO dto = new ProductDTO();
+        dto.setName(product.getName());
+        return dto;
+    }
 
     private final ProductService productService;
     private final ProductCategoryService categoryService;
@@ -39,9 +61,6 @@ public class ProductAppService {
         if (product == null || product.getIsDeleted() == 1) {
             return null;
         }
-
-        // 增加浏览量
-        productService.incrementViewCount(id);
 
         // 获取分类名称
         ProductCategory category = categoryService.getCategoryById(product.getCategoryId());
@@ -152,7 +171,7 @@ public class ProductAppService {
      * 更新商品状态
      *
      * @param id     商品ID
-     * @param status 状态：0-下架，1-上架，2-预售
+     * @param status 状态：0-下架，1-上架
      * @return 是否更新成功
      */
     @Transactional(rollbackFor = Exception.class)
@@ -223,15 +242,4 @@ public class ProductAppService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * 减少商品库存
-     *
-     * @param id    商品ID
-     * @param count 减少数量
-     * @return 是否减少成功
-     */
-    @Transactional(rollbackFor = Exception.class)
-    public boolean decrementStock(Long id, int count) {
-        return productService.decrementStock(id, count);
-    }
 }

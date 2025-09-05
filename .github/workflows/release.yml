@@ -57,7 +57,7 @@ jobs:
 
 
   update-argocd-config:
-    needs: publish
+    needs: release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout ArgoCD config repo

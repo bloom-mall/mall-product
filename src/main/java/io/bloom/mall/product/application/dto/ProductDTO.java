@@ -3,7 +3,6 @@ package io.bloom.mall.product.application.dto;
 import io.bloom.mall.product.domain.entity.Product;
 import lombok.Data;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -33,17 +32,12 @@ public class ProductDTO {
     private String name;
 
     /**
-     * 商品价格
+     * 商品主图
      */
-    private BigDecimal price;
+    private String mainPicture;
 
     /**
-     * 库存数量
-     */
-    private Integer stock;
-
-    /**
-     * 状态：0-下架，1-上架，2-预售
+     * 状态：0-下架，1-上架
      */
     private Integer status;
 
@@ -61,16 +55,6 @@ public class ProductDTO {
      * 是否推荐：0-否，1-是
      */
     private Integer isRecommend;
-
-    /**
-     * 销量
-     */
-    private Integer salesCount;
-
-    /**
-     * 浏览量
-     */
-    private Integer viewCount;
 
     /**
      * 创建时间
@@ -97,14 +81,11 @@ public class ProductDTO {
         dto.setId(product.getId());
         dto.setCategoryId(product.getCategoryId());
         dto.setName(product.getName());
-        dto.setPrice(product.getPrice());
-        dto.setStock(product.getStock());
+        dto.setMainPicture(product.getMainPicture());
         dto.setStatus(product.getStatus());
         dto.setIsHot(product.getIsHot());
         dto.setIsNew(product.getIsNew());
         dto.setIsRecommend(product.getIsRecommend());
-        dto.setSalesCount(product.getSalesCount());
-        dto.setViewCount(product.getViewCount());
         dto.setCreateTime(product.getCreateTime());
         dto.setUpdateTime(product.getUpdateTime());
 
@@ -126,14 +107,11 @@ public class ProductDTO {
         product.setId(dto.getId());
         product.setCategoryId(dto.getCategoryId());
         product.setName(dto.getName());
-        product.setPrice(dto.getPrice());
-        product.setStock(dto.getStock());
+        product.setMainPicture(dto.getMainPicture());
         product.setStatus(dto.getStatus());
         product.setIsHot(dto.getIsHot());
         product.setIsNew(dto.getIsNew());
         product.setIsRecommend(dto.getIsRecommend());
-        product.setSalesCount(dto.getSalesCount());
-        product.setViewCount(dto.getViewCount());
 
         return product;
     }

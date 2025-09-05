@@ -1,3 +1,7 @@
+server:
+  servlet:
+    context-path: /mall/product
+
 spring:
   application:
     name: mall-product
@@ -19,7 +23,7 @@ spring:
 
   config:
     import:
-      - nacos:mall-product-config.yaml
+      - nacos:${spring.application.name}-config.yaml
 
 management:
   endpoint:
@@ -27,5 +31,6 @@ management:
       show-details: never
   endpoints:
     web:
+      base-path: /
       exposure:
         include: health,info,metrics
