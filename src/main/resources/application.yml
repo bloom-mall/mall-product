@@ -1,7 +1,3 @@
-server:
-  servlet:
-    context-path: /mall/product
-
 spring:
   application:
     name: mall-product

@@ -27,30 +27,26 @@ ext {
 }
 
 dependencies {
-    implementation ('org.springframework.boot:spring-boot-starter-web') {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
-    }
-    implementation 'org.springframework.boot:spring-boot-starter-undertow'
-	implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-config'
     implementation 'com.alibaba.cloud:spring-cloud-starter-alibaba-nacos-discovery'
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation "org.springframework.boot:spring-boot-starter-validation"
 
-    implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
-	
-	// 数据库相关
+    // --- 持久层依赖 Start ---
     implementation "com.mysql:mysql-connector-j:${mysqlVersion}"
-	implementation "com.alibaba:druid-spring-boot-starter:${druidVersion}"
-	implementation "com.mybatis-flex:mybatis-flex-spring-boot3-starter:${mybatisFlexVersion}"
+    implementation "com.alibaba:druid-spring-boot-starter:${druidVersion}"
+    implementation "com.mybatis-flex:mybatis-flex-spring-boot3-starter:${mybatisFlexVersion}"
+    annotationProcessor "com.mybatis-flex:mybatis-flex-processor:${mybatisFlexVersion}"
+    // --- 持久层依赖 End ---
 
+    implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
-    annotationProcessor "com.mybatis-flex:mybatis-flex-processor:${mybatisFlexVersion}"
-
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.cloud:spring-cloud-starter-contract-stub-runner'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 dependencyManagement {
