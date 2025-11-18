@@ -27,6 +27,5 @@ management:
       show-details: never
   endpoints:
     web:
-      base-path: /
       exposure:
         include: health,info,metrics
